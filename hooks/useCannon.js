@@ -5,7 +5,7 @@ import { useRender } from 'react-three-fiber';
 // Cannon-world context provider
 const context = React.createContext();
 
-export function CannonProvider({ children }) {
+export const CannonProvider = ({ children }) => {
   // Set up physics
   const [world] = useState(() => new World());
 
@@ -18,8 +18,8 @@ export function CannonProvider({ children }) {
   // Run world stepper every frame
   useRender(() => world.step(1 / 60));
   // Distribute world via context
-  return <context.Provider value={world} children={children} />;
-}
+  return <context.Provider value={world}>{children}</context.Provider>;
+};
 
 // Custom hook to maintain a world physics body
 export function useCannon({ ...props }, fn, deps = []) {

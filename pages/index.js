@@ -1,20 +1,30 @@
 import * as THREE from 'three';
 import React from 'react';
-import { Canvas } from 'react-three-fiber';
+// import { Canvas } from 'react-three-fiber';
+import dynamic from 'next/dynamic';
 
-import Model from '../components/model';
+import { Vehicle } from '../components/Vehicle';
 import Controls from '../components/controls';
 import TruckModel from '../models/lowpoly_truck.glb';
-import uniforms from '../utils/uniforms';
+// import uniforms from '../utils/uniforms';
 import { Ground } from '../components/Ground';
 import { RectAreaLightDecl } from '../components/RectAreaLightDecl';
 import { CannonProvider } from '../hooks/useCannon';
+import { Quaternion } from 'three';
 
-uniforms.init(THREE);
+const DynamicCanvasNoSSR = dynamic(
+  () => import('react-three-fiber').then(mod => mod.Canvas),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+);
 
-export default () => (
+// uniforms.init(THREE);
+
+const Index = () => (
   <main>
-    <Canvas
+    <DynamicCanvasNoSSR
       camera={{ position: [0, 0, 2] }}
       onCreated={({ gl }) => {
         gl.shadowMap.enabled = true;
@@ -48,13 +58,13 @@ export default () => (
       />
 
       <CannonProvider>
-        <Model url={TruckModel} />
+        <Vehicle url={TruckModel} />
 
-        <Ground />
+        <Ground quaternion={new Quaternion(-0.7, 0, 0, 1)} />
       </CannonProvider>
 
       <Controls
-        autoRotate
+        autoRotate={false}
         enablePan={false}
         enableZoom={false}
         enableDamping
@@ -63,7 +73,7 @@ export default () => (
         maxPolarAngle={Math.PI / 3}
         minPolarAngle={Math.PI / 3}
       />
-    </Canvas>
+    </DynamicCanvasNoSSR>
     <style global jsx>
       {`
         body {
@@ -87,3 +97,5 @@ export default () => (
     </style>
   </main>
 );
+
+export default Index;
