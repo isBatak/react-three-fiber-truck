@@ -1,19 +1,18 @@
 import * as THREE from 'three';
 import React from 'react';
-// import { Canvas } from 'react-three-fiber';
 import dynamic from 'next/dynamic';
 
 import { Vehicle } from '../components/Vehicle';
-import Controls from '../components/controls';
-import TruckModel from '../models/lowpoly_truck.glb';
-// import uniforms from '../utils/uniforms';
+import Controls from '../components/Controls';
+import truckModel from '../models/truck.glb';
 import { Ground } from '../components/Ground';
-import { RectAreaLightDecl } from '../components/RectAreaLightDecl';
 import { CannonProvider } from '../hooks/useCannon';
 import { Quaternion } from 'three';
+import { DirectionalLight } from '../components/DirectionalLight';
+import { AmbientLight } from '../components/AmbientLight';
 
 const DynamicCanvasNoSSR = dynamic(
-  () => import('react-three-fiber').then(mod => mod.Canvas),
+  () => import('react-three-fiber').then((mod) => mod.Canvas),
   {
     ssr: false,
     loading: () => <p>Loading...</p>,
@@ -33,34 +32,13 @@ const Index = () => (
         gl.gammaOutput = true;
       }}
     >
-      <ambientLight intensity={0.2} />
-      <RectAreaLightDecl />
-      <RectAreaLightDecl
-        intensity={4}
-        width={100}
-        height={1000}
-        position={[0, 0, 2000]}
-        color="purple"
-      />
-
-      <RectAreaLightDecl
-        intensity={0.5}
-        width={500}
-        height={1000}
-        position={[0, 1000, 0]}
-      />
-
-      <RectAreaLightDecl
-        intensity={5}
-        width={1000}
-        height={100}
-        position={[-800, 0, 800]}
-      />
+      <AmbientLight intensity={0.4} />
+      <DirectionalLight />
 
       <CannonProvider>
-        <Vehicle url={TruckModel} />
+        <Vehicle url={truckModel} />
 
-        <Ground quaternion={new Quaternion(-0.7, 0, 0, 1)} />
+        <Ground quaternion={new Quaternion(-0.7, 0, 0, 1)} color="#FBDF90" />
       </CannonProvider>
 
       <Controls

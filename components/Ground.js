@@ -13,7 +13,7 @@ export const Ground = ({
 }) => {
   const ref = useCannon(
     { mass: 0 },
-    body => {
+    (body) => {
       body.addShape(new Plane());
       body.position.set(...position);
       body.quaternion.set(...quaternion.toArray());
@@ -22,9 +22,9 @@ export const Ground = ({
   );
 
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref} receiveShadow>
       <planeBufferGeometry attach="geometry" args={[width, height]} />
-      <meshBasicMaterial attach="material" color={color} />
+      <meshLambertMaterial attach="material" color={color} />
     </mesh>
   );
 };
