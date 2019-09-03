@@ -2,7 +2,7 @@ import React from 'react';
 import { Plane } from 'cannon';
 import { Quaternion } from 'three';
 
-import { useCannon } from '../hooks/useCannon';
+import { useCannon } from '../libs/cannon/useCannon';
 
 export const Ground = ({
   width = 100,

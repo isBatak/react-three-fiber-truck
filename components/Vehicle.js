@@ -3,7 +3,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Vec3, RaycastVehicle } from 'cannon';
 import { MeshPhongMaterial } from 'three';
 
-import { useCannon } from '../hooks/useCannon';
+import { useCannon } from '../libs/cannon/useCannon';
+import { useGLTFLoader } from '../hooks/useGLTFLoader';
 
 const options = {
   radius: 0.5,
@@ -23,7 +24,7 @@ const options = {
 };
 
 export const Vehicle = ({ url }) => {
-  const [scene, set] = React.useState();
+  // const [scene, set] = React.useState();
 
   // const ref = useCannon(
   //   { mass: 0 },
@@ -41,25 +42,13 @@ export const Vehicle = ({ url }) => {
   //   [position, quaternion]
   // );
 
-  React.useMemo(
-    () =>
-      new GLTFLoader().load(url, (gltf) => {
-        console.log(gltf.scene);
-        gltf.scene.traverse((object) => {
-          if (object.type === 'Mesh') {
-            object.material.dispose();
-            object.material = new MeshPhongMaterial({
-              map: object.material.map,
-              color: object.material.color,
-            });
-            object.castShadow = true;
-            object.receiveShadow = true;
-          }
-        });
-        set(gltf.scene);
-      }),
-    [url]
-  );
+  const gltf = useGLTFLoader(url);
 
-  return scene ? <primitive object={scene} /> : null;
+  // console.log(gltf);
+
+  return gltf
+    ? gltf.scene.children.map((mesh) => (
+        <primitive key={mesh.uuid} object={mesh} castShadow />
+      ))
+    : null;
 };

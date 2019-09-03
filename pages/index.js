@@ -4,12 +4,12 @@ import dynamic from 'next/dynamic';
 
 import { Vehicle } from '../components/Vehicle';
 import Controls from '../components/Controls';
-import truckModel from '../models/truck.glb';
 import { Ground } from '../components/Ground';
-import { CannonProvider } from '../hooks/useCannon';
 import { Quaternion } from 'three';
 import { DirectionalLight } from '../components/DirectionalLight';
 import { AmbientLight } from '../components/AmbientLight';
+import { Cannon } from '../libs/cannon/Cannon';
+import { SAPBroadphase } from 'cannon';
 
 const DynamicCanvasNoSSR = dynamic(
   () => import('react-three-fiber').then((mod) => mod.Canvas),
@@ -35,11 +35,11 @@ const Index = () => (
       <AmbientLight intensity={0.4} />
       <DirectionalLight />
 
-      <CannonProvider>
-        <Vehicle url={truckModel} />
+      <Cannon broadphase={new SAPBroadphase()}>
+        <Vehicle url="/static/models/truck.glb" />
 
         <Ground quaternion={new Quaternion(-0.7, 0, 0, 1)} color="#FBDF90" />
-      </CannonProvider>
+      </Cannon>
 
       <Controls
         autoRotate={false}
@@ -59,10 +59,6 @@ const Index = () => (
           padding: 0;
         }
 
-        canvas {
-          background: transparent;
-        }
-
         main {
           display: flex;
           flex-direction: column;
@@ -70,6 +66,10 @@ const Index = () => (
           justify-content: center;
           height: 100vh;
           background: #272730;
+        }
+
+        canvas {
+          background: transparent;
         }
       `}
     </style>
