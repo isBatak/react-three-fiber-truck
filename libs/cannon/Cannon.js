@@ -12,6 +12,8 @@ export const Cannon = ({
 }) => {
   const [world] = useState(() => new World());
 
+  console.log(broadphase);
+
   useEffect(() => {
     world.broadphase = broadphase;
     world.solver.iterations = solverIterations;
