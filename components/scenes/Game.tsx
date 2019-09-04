@@ -21,7 +21,7 @@ export const Game: FC<IGameProps> = (props) => {
       <DirectionalLight />
 
       <Cannon broadphase={broadpass}>
-        <Vehicle url="/static/models/truck.glb" />
+        <Vehicle url="/static/models/truckAO.glb" />
         <Ground quaternion={groundQuaternion} color="#FBDF90" />
       </Cannon>
 
