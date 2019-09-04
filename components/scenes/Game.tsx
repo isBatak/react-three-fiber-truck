@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Quaternion } from 'three';
 import { SAPBroadphase } from 'cannon';
 
