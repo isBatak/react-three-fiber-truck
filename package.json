@@ -14,8 +14,9 @@
     "next": "9.0.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-three-fiber": "^2.2.11",
-    "three": "0.108.0"
+    "react-three-fiber": "^2.4.3",
+    "three": "0.108.0",
+    "why-did-you-update": "^1.0.6"
   },
   "devDependencies": {
     "@types/cannon": "^0.1.4",
