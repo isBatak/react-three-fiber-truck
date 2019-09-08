@@ -33,11 +33,10 @@ export const Cannon: FC<ICannonProps> = ({
   useEffect(() => {
     world.broadphase = broadphase;
     world.solver.iterations = solverIterations;
-
+    world.defaultContactMaterial.friction = 0;
     if (gravity) {
       world.gravity.set(gravity.x, gravity.y, gravity.z);
     }
-    world.defaultContactMaterial.friction = 0;
   }, [broadphase, solverIterations, gravity]);
 
   const { scene } = useThree();

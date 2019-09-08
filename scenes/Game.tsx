@@ -14,23 +14,22 @@ interface IGameProps {}
 
 export const Game: FC<IGameProps> = memo(() => {
   const groundQuaternion = new Quaternion(-0.7, 0, 0, 1);
-  const broadpass = new SAPBroadphase();
 
   return (
     <>
       <AmbientLight intensity={0.4} />
       <DirectionalLight />
 
-      <Cannon broadphase={broadpass} debug>
+      <Cannon debug>
         <Vehicle url="/static/models/truckAO.glb" />
         <Ground quaternion={groundQuaternion} color="#FBDF90" />
 
         <Box position={[1, 4, 1]} />
-        {/* <Box position={[2, 4, 5]} />
+        <Box position={[2, 4, 5]} />
         <Box position={[0, 4, 6]} />
         <Box position={[-1, 4, 8]} />
         <Box position={[-2, 4, 13]} />
-        <Box position={[2, 4, 13]} /> */}
+        <Box position={[2, 4, 13]} />
       </Cannon>
 
       <Controls
