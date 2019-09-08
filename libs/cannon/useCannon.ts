@@ -4,7 +4,7 @@ import { useRender } from 'react-three-fiber';
 import { context } from './Cannon';
 
 export function useCannon({ ...props }, fn, deps = []) {
-  const ref = useRef();
+  const ref = useRef(null);
   const world = useContext(context);
 
   const [body] = useState(() => new Body(props));

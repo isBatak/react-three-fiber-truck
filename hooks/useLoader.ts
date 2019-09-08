@@ -19,8 +19,6 @@ export function useLoader<T>(
   }, [proto]);
   const [_, forceUpdate] = useState(false);
 
-  console.log(key);
-
   useEffect(() => {
     if (!cache.has(key)) {
       loader.load(url, (data: T) => {

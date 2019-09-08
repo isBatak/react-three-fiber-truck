@@ -33,7 +33,7 @@ export const Vehicle: FC<IVehicle> = ({ url }) => {
   //   { mass: 0 },
   //   body => {
   //     body.addShape(new RaycastVehicle({
-  //       hassisBody: null,
+  //       chassisBody: null,
   //       indexRightAxis: 0,
   //       indexUpAxis: 1,
   //       indexForwardAxis: 2,

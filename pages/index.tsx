@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { CanvasProps } from 'react-three-fiber';
 import { Vector3 } from 'three';
 
-import { Game } from '../components/scenes/Game';
+import { Game } from '../scenes/Game';
 
 const DynamicCanvasNoSSR = dynamic<CanvasProps>(
   () => import('react-three-fiber').then((mod) => mod.Canvas),
