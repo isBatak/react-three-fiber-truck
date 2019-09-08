@@ -11,7 +11,18 @@
 - glTF Settings for AO
   - https://github.com/KhronosGroup/glTF-Blender-IO/blob/master/addons/io_scene_gltf2/blender/imp/gltf2_blender_map_occlusion.py#L51
 
+# TOOLS
+
+- npx gltf-pipeline -i input.gltf -o output.gltf -d --draco.compressionLevel=10
+
 # TODOS
 
 - move physics to workers [react-hooks-worker](https://github.com/dai-shi/react-hooks-worker)
--
+- use DRACO loader
+  ```
+  const gltf = useLoader(GLTFLoader, url, (loader) => {
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('/draco-gltf/');
+    loader.setDRACOLoader(dracoLoader);
+  });
+  ```
