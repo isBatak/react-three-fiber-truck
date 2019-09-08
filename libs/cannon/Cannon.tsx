@@ -1,6 +1,8 @@
 import { World, NaiveBroadphase, Vec3, BroadPhase } from 'cannon';
-import React, { useState, useEffect, createContext, FC } from 'react';
+import React, { useState, useEffect, createContext, FC, memo } from 'react';
 import { useRender } from 'react-three-fiber';
+
+import { useWhyDidYouUpdate } from '../../hooks/useWhyDidYouUpdate';
 
 export const context = createContext(null);
 
@@ -18,14 +20,14 @@ export const Cannon: FC<ICannonProps> = ({
 }) => {
   const [world] = useState(() => new World());
 
-  console.log(broadphase);
-
   useEffect(() => {
     world.broadphase = broadphase;
     world.solver.iterations = solverIterations;
-    world.gravity.set(gravity.x, gravity.y, gravity.z);
+    if (gravity) {
+      world.gravity.set(gravity.x, gravity.y, gravity.z);
+    }
     world.defaultContactMaterial.friction = 0;
-  }, [broadphase, solverIterations, gravity.x, gravity.y, gravity.z]);
+  }, [broadphase, solverIterations, gravity]);
 
   useRender(() => world.step(1 / 60), false, [world]);
 

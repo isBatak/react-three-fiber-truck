@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, memo } from 'react';
 import { Quaternion } from 'three';
 import { SAPBroadphase } from 'cannon';
 
@@ -11,7 +11,7 @@ import { Cannon } from '../../libs/cannon/Cannon';
 
 interface IGameProps {}
 
-export const Game: FC<IGameProps> = (props) => {
+export const Game: FC<IGameProps> = memo(() => {
   const groundQuaternion = new Quaternion(-0.7, 0, 0, 1);
   const broadpass = new SAPBroadphase();
 
@@ -37,4 +37,4 @@ export const Game: FC<IGameProps> = (props) => {
       />
     </>
   );
-};
+});

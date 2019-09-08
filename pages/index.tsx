@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { CanvasProps } from 'react-three-fiber';
@@ -18,9 +17,8 @@ const Index = () => (
   <main>
     <DynamicCanvasNoSSR
       camera={{ position: new Vector3(0, 0, 2) }}
+      shadowMap
       onCreated={({ gl }) => {
-        gl.shadowMap.enabled = true;
-        gl.shadowMap.type = THREE.PCFSoftShadowMap;
         gl.gammaFactor = 2.2;
         gl.gammaOutput = true;
       }}

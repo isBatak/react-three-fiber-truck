@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 // import { useCannon } from '../libs/cannon/useCannon';
-import { useGLTFLoader } from '../hooks/useGLTFLoader';
+import { useLoader } from '../hooks/useLoader';
 
 // const options = {
 //   radius: 0.5,
@@ -20,7 +21,12 @@ import { useGLTFLoader } from '../hooks/useGLTFLoader';
 //   useCustomSlidingRotationalSpeed: true,
 // };
 
-export const Vehicle = ({ url }) => {
+export interface IVehicle {
+  url: String;
+}
+
+// @ts-ignore
+export const Vehicle: FC<IVehicle> = ({ url }) => {
   // const [scene, set] = React.useState();
 
   // const ref = useCannon(
@@ -39,13 +45,18 @@ export const Vehicle = ({ url }) => {
   //   [position, quaternion]
   // );
 
-  const gltf = useGLTFLoader(url);
-
-  // console.log(gltf);
+  // @ts-ignore
+  const gltf = useLoader<GLTF>(GLTFLoader, url);
 
   return gltf
     ? gltf.scene.children.map((mesh) => (
-        <primitive key={mesh.uuid} object={mesh} castShadow />
+        <mesh key={mesh.uuid} {...mesh} castShadow>
+          <meshStandardMaterial
+            attach="material"
+            {...mesh.material}
+            roughness={1}
+          />
+        </mesh>
       ))
     : null;
 };
