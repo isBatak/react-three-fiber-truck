@@ -9,6 +9,7 @@ import { Box } from '../components/Box';
 import { DirectionalLight } from '../components/DirectionalLight';
 import { AmbientLight } from '../components/AmbientLight';
 import { Cannon } from '../libs/cannon/Cannon';
+import { Logo } from '../components/Logo';
 
 interface IGameProps {}
 
@@ -22,6 +23,7 @@ export const Game: FC<IGameProps> = memo(() => {
 
       <Cannon debug>
         <Vehicle url="/static/models/truckAO.glb" />
+        <Logo url="/static/models/logo.gltf" />
         <Ground quaternion={groundQuaternion} color="#FBDF90" />
 
         <Box position={[1, 4, 1]} />
@@ -34,7 +36,7 @@ export const Game: FC<IGameProps> = memo(() => {
 
       <Controls
         autoRotate={false}
-        enablePan={false}
+        enablePan={true}
         enableZoom={false}
         enableDamping
         dampingFactor={0.5}
