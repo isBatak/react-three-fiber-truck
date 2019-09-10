@@ -13,8 +13,6 @@ import { Logo } from '../components/Logo';
 interface IGameProps {}
 
 export const Game: FC<IGameProps> = memo(() => {
-  const groundQuaternion = new Quaternion(-0.7, 0, 0, 1);
-
   return (
     <>
       <AmbientLight intensity={0.4} />
@@ -23,14 +21,14 @@ export const Game: FC<IGameProps> = memo(() => {
       <Cannon debug>
         <Vehicle url="/static/models/truck.gltf" />
         <Logo url="/static/models/logo.gltf" />
-        <Ground quaternion={groundQuaternion} color="#FBDF90" />
+        <Ground color="#FBDF90" />
 
-        <Box position={[1, 4, 1]} />
+        {/* <Box position={[1, 4, 1]} />
         <Box position={[2, 4, 5]} />
         <Box position={[0, 4, 6]} />
         <Box position={[-1, 4, 8]} />
         <Box position={[-2, 4, 13]} />
-        <Box position={[2, 4, 13]} />
+        <Box position={[2, 4, 13]} /> */}
       </Cannon>
 
       <Controls

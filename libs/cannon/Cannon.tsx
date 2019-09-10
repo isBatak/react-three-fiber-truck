@@ -3,9 +3,7 @@ import React, { useState, useEffect, createContext, FC, useMemo } from 'react';
 import { useRender, useThree } from 'react-three-fiber';
 import { DebugRenderer } from './DebugRenderer';
 
-import { useWhyDidYouUpdate } from '../../hooks/useWhyDidYouUpdate';
-
-export const context = createContext(null);
+export const CannonContext = createContext<World>(null);
 
 export interface ICannonProps {
   solverIterations?: number;
@@ -44,5 +42,7 @@ export const Cannon: FC<ICannonProps> = ({
     }
   });
 
-  return <context.Provider value={world}>{children}</context.Provider>;
+  return (
+    <CannonContext.Provider value={world}>{children}</CannonContext.Provider>
+  );
 };
