@@ -1,12 +1,5 @@
-import { World, NaiveBroadphase, Vec3, BroadPhase } from 'cannon';
-import React, {
-  useState,
-  useEffect,
-  createContext,
-  FC,
-  memo,
-  useMemo,
-} from 'react';
+import { World, Vec3, SAPBroadphase } from 'cannon';
+import React, { useState, useEffect, createContext, FC, useMemo } from 'react';
 import { useRender, useThree } from 'react-three-fiber';
 import { DebugRenderer } from './DebugRenderer';
 
@@ -15,14 +8,12 @@ import { useWhyDidYouUpdate } from '../../hooks/useWhyDidYouUpdate';
 export const context = createContext(null);
 
 export interface ICannonProps {
-  broadphase?: BroadPhase;
   solverIterations?: number;
   gravity?: Vec3;
   debug?: boolean;
 }
 
 export const Cannon: FC<ICannonProps> = ({
-  broadphase = new NaiveBroadphase(),
   solverIterations = 10,
   gravity = new Vec3(0, -10, 0),
   debug,
@@ -31,13 +22,13 @@ export const Cannon: FC<ICannonProps> = ({
   const [world] = useState(() => new World());
 
   useEffect(() => {
-    world.broadphase = broadphase;
+    world.broadphase = new SAPBroadphase(world);
     world.solver.iterations = solverIterations;
     world.defaultContactMaterial.friction = 0;
     if (gravity) {
       world.gravity.set(gravity.x, gravity.y, gravity.z);
     }
-  }, [broadphase, solverIterations, gravity]);
+  }, [solverIterations, gravity]);
 
   const { scene } = useThree();
 

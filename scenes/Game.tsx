@@ -1,6 +1,5 @@
 import { FC, memo } from 'react';
 import { Quaternion } from 'three';
-import { SAPBroadphase } from 'cannon';
 
 import { Vehicle } from '../components/Vehicle';
 import Controls from '../components/Controls';
@@ -22,7 +21,7 @@ export const Game: FC<IGameProps> = memo(() => {
       <DirectionalLight />
 
       <Cannon debug>
-        <Vehicle url="/static/models/truckAO.glb" />
+        <Vehicle url="/static/models/truck.gltf" />
         <Logo url="/static/models/logo.gltf" />
         <Ground quaternion={groundQuaternion} color="#FBDF90" />
 
