@@ -26,3 +26,18 @@
     loader.setDRACOLoader(dracoLoader);
   });
   ```
+
+# PRESENTATION NOTES
+
+- what is three.js
+- setup
+- basic usage (canvas, scene, mash, lights)
+- quaternion
+  - Inscription on Broom Bridge (Dublin) regarding the discovery of Quaternions multiplication by Sir William Rowan Hamilton https://upload.wikimedia.org/wikipedia/commons/d/d5/Inscription_on_Broom_Bridge_%28Dublin%29_regarding_the_discovery_of_Quaternions_multiplication_by_Sir_William_Rowan_Hamilton.jpg
+  - formula
+  - gimbal lock (gif animation)
+  - `const quaternion = new Quaternion().setFromAxisAngle(new Vector3( 0, 1, 0 ), Math.PI / 2);`
+- react-three-fiber
+- exporting models
+- physics engine
+- demo
