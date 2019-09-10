@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "ammo": "^3.0.3",
     "cannon": "0.6.2",
     "next": "9.0.5",
     "react": "^16.9.0",

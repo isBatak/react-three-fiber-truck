@@ -10,6 +10,7 @@
   - https://docs.blender.org/manual/en/2.80/addons/io_scene_gltf2.html
 - glTF Settings for AO
   - https://github.com/KhronosGroup/glTF-Blender-IO/blob/master/addons/io_scene_gltf2/blender/imp/gltf2_blender_map_occlusion.py#L51
+- Space Dust Racing UE4 Arcade Vehicle Physics Tour https://www.youtube.com/watch?v=LG1CtlFRmpU
 
 # TOOLS
 
