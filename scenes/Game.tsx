@@ -20,7 +20,7 @@ export const Game: FC<IGameProps> = memo(() => {
 
       <Cannon debug>
         <Vehicle url="/static/models/truck.gltf" />
-        <Logo url="/static/models/logo.gltf" />
+        {/* <Logo url="/static/models/logo.gltf" /> */}
         <Ground color="#FBDF90" />
 
         {/* <Box position={[1, 4, 1]} />

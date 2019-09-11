@@ -41,4 +41,5 @@
 - react-three-fiber
 - exporting models
 - physics engine
+- three.js dev-tools plugin
 - demo

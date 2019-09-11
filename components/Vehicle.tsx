@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState, useCallback } from 'react';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 import { useLoader } from '../hooks/useLoader';
@@ -14,9 +14,10 @@ import {
   Cylinder,
   IWheelInfoOptions,
 } from 'cannon';
+import { useEvent } from '../hooks/useEvent';
 
-const options: IWheelInfoOptions = {
-  radius: 0.3,
+const wheelInfoOptions: IWheelInfoOptions = {
+  radius: 1,
   directionLocal: new Vec3(0, -1, 0),
   suspensionStiffness: 45,
   suspensionRestLength: 0.4,
@@ -34,11 +35,20 @@ const options: IWheelInfoOptions = {
 
 export interface IVehicle {
   url: String;
+  maxSteerValue?: number;
+  maxForce?: number;
+  brakeForce?: number;
 }
 
 // @ts-ignore
-export const Vehicle: FC<IVehicle> = ({ url }) => {
+export const Vehicle: FC<IVehicle> = ({
+  url,
+  maxSteerValue = 0.5,
+  maxForce = 1000,
+  brakeForce = 1000000,
+}) => {
   const world = useContext(CannonContext);
+  const [vehicle, setVehicle] = useState();
 
   useEffect(() => {
     const chassisShape = new Box(new Vec3(1, 0.5, 2));
@@ -53,38 +63,77 @@ export const Vehicle: FC<IVehicle> = ({ url }) => {
       indexLeftAxis: 2,
     });
 
-    const cylinderShape = new Cylinder(
-      options.radius,
-      options.radius,
-      options.radius / 2,
-      20
-    );
-    const wheelBody = new Body({ mass: 1 });
-    const quaternion = new Quaternion();
-    quaternion.setFromAxisAngle(new Vec3(0, 1, 0), Math.PI / 2);
-    wheelBody.addShape(cylinderShape, new Vec3(0, 0, 0), quaternion);
-
     const axlewidth = 0.8;
 
-    options.chassisConnectionPointLocal.set(axlewidth, 0, -1);
-    options.body = wheelBody;
-    vehicle.addWheel(options);
+    wheelInfoOptions.chassisConnectionPointLocal.set(axlewidth, 0, -1);
+    vehicle.addWheel(wheelInfoOptions);
 
-    options.chassisConnectionPointLocal.set(-axlewidth, 0, -1);
-    vehicle.addWheel(options);
+    wheelInfoOptions.chassisConnectionPointLocal.set(-axlewidth, 0, -1);
+    vehicle.addWheel(wheelInfoOptions);
 
-    options.chassisConnectionPointLocal.set(axlewidth, 0, 1);
-    vehicle.addWheel(options);
+    wheelInfoOptions.chassisConnectionPointLocal.set(axlewidth, 0, 1);
+    vehicle.addWheel(wheelInfoOptions);
 
-    options.chassisConnectionPointLocal.set(-axlewidth, 0, 1);
-    vehicle.addWheel(options);
+    wheelInfoOptions.chassisConnectionPointLocal.set(-axlewidth, 0, 1);
+    vehicle.addWheel(wheelInfoOptions);
 
     vehicle.addToWorld(world);
+
+    setVehicle(vehicle);
 
     return () => {
       vehicle.removeFromWorld(world);
     };
   }, []);
+
+  const onKeyHandler = useCallback(
+    ({ key, type }) => {
+      const up = type == 'keyup';
+      if (!up && type !== 'keydown') {
+        return;
+      }
+
+      vehicle.setBrake(0, 0);
+      vehicle.setBrake(0, 1);
+      vehicle.setBrake(0, 2);
+      vehicle.setBrake(0, 3);
+
+      console.log(key, type);
+
+      switch (key) {
+        case 'w': // forward
+          vehicle.applyEngineForce(up ? 0 : maxForce, 0);
+          vehicle.applyEngineForce(up ? 0 : maxForce, 1);
+          break;
+        case 's': // backward
+          vehicle.applyEngineForce(up ? 0 : -maxForce, 0);
+          vehicle.applyEngineForce(up ? 0 : -maxForce, 1);
+          break;
+        case 'd': // right
+          vehicle.setSteeringValue(up ? 0 : -maxSteerValue, 0);
+          vehicle.setSteeringValue(up ? 0 : -maxSteerValue, 1);
+          break;
+        case 'a': // left
+          vehicle.setSteeringValue(up ? 0 : maxSteerValue, 0);
+          vehicle.setSteeringValue(up ? 0 : maxSteerValue, 1);
+          break;
+        case 'b': // b
+          // vehicle.setBrake(brakeForce, 0);
+          // vehicle.setBrake(brakeForce, 1);
+          vehicle.setBrake(brakeForce, 2);
+          vehicle.setBrake(brakeForce, 3);
+          break;
+      }
+    },
+    [vehicle]
+  );
+
+  useEvent('keyup', onKeyHandler);
+  useEvent('keydown', onKeyHandler);
+
+  console.log(vehicle);
+
+  return null;
 
   // @ts-ignore
   const gltf = useLoader<GLTF>(GLTFLoader, url);
