@@ -98,8 +98,6 @@ export const Vehicle: FC<IVehicle> = ({
       vehicle.setBrake(0, 2);
       vehicle.setBrake(0, 3);
 
-      console.log(key, type);
-
       switch (key) {
         case 'w': // forward
           vehicle.applyEngineForce(up ? 0 : maxForce, 0);
@@ -130,8 +128,6 @@ export const Vehicle: FC<IVehicle> = ({
 
   useEvent('keyup', onKeyHandler);
   useEvent('keydown', onKeyHandler);
-
-  console.log(vehicle);
 
   return null;
 
