@@ -132,17 +132,17 @@ export const Vehicle: FC<IVehicle> = ({
   return null;
 
   // @ts-ignore
-  const gltf = useLoader<GLTF>(GLTFLoader, url);
+  // const gltf = useLoader<GLTF>(GLTFLoader, url);
 
-  return gltf
-    ? gltf.scene.children.map((mesh) => (
-        <mesh key={mesh.uuid} {...mesh} castShadow>
-          <meshStandardMaterial
-            attach="material"
-            {...mesh.material}
-            roughness={1}
-          />
-        </mesh>
-      ))
-    : null;
+  // return gltf
+  //   ? gltf.scene.children.map((mesh) => (
+  //       <mesh key={mesh.uuid} {...mesh} castShadow>
+  //         <meshStandardMaterial
+  //           attach="material"
+  //           {...mesh.material}
+  //           roughness={1}
+  //         />
+  //       </mesh>
+  //     ))
+  //   : null;
 };
