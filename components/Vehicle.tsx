@@ -1,4 +1,11 @@
-import React, { FC, useContext, useEffect, useState, useCallback } from 'react';
+import React, {
+  FC,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+} from 'react';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 import { useLoader } from '../hooks/useLoader';
@@ -45,7 +52,7 @@ export const Vehicle: FC<IVehicle> = ({
   url,
   maxSteerValue = 0.5,
   maxForce = 1000,
-  brakeForce = 1000000,
+  brakeForce = 1000,
 }) => {
   const world = useContext(CannonContext);
   const [vehicle, setVehicle] = useState();
@@ -86,11 +93,24 @@ export const Vehicle: FC<IVehicle> = ({
     };
   }, []);
 
+  const activeKeys = useRef<Array<string>>([]);
+
   const onKeyHandler = useCallback(
     ({ key, type }) => {
       const up = type == 'keyup';
-      if (!up && type !== 'keydown') {
+      if (
+        (!up && type !== 'keydown') ||
+        (activeKeys.current.includes(key) && type === 'keydown')
+      ) {
         return;
+      }
+
+      if (up) {
+        activeKeys.current = activeKeys.current.filter(
+          (value) => value !== key
+        );
+      } else {
+        activeKeys.current = [...activeKeys.current, key];
       }
 
       vehicle.setBrake(0, 0);
@@ -104,8 +124,8 @@ export const Vehicle: FC<IVehicle> = ({
           vehicle.applyEngineForce(up ? 0 : maxForce, 1);
           break;
         case 's': // backward
-          vehicle.applyEngineForce(up ? 0 : -maxForce, 0);
-          vehicle.applyEngineForce(up ? 0 : -maxForce, 1);
+          vehicle.applyEngineForce(up ? 0 : -maxForce, 2);
+          vehicle.applyEngineForce(up ? 0 : -maxForce, 3);
           break;
         case 'd': // right
           vehicle.setSteeringValue(up ? 0 : -maxSteerValue, 0);
