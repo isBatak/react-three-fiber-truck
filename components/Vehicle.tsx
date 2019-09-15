@@ -21,14 +21,14 @@ import {
   Cylinder,
 } from 'cannon';
 import { useEvent } from '../hooks/useEvent';
-import { Mesh } from 'three';
+import { Mesh, Vector3 } from 'three';
 import { useRender } from 'react-three-fiber';
 
 const wheelInfoOptions: IWheelInfoOptions = {
   radius: 0.5,
   directionLocal: new Vec3(0, 0, -1),
-  suspensionStiffness: 30,
-  suspensionRestLength: 0.3,
+  suspensionStiffness: 20,
+  suspensionRestLength: 0.2,
   frictionSlip: 5,
   dampingRelaxation: 2.3,
   dampingCompression: 4.4,
@@ -62,98 +62,81 @@ export const Vehicle: FC<IVehicle> = ({
   const world = useContext(CannonContext);
   const [vehicle, setVehicle] = useState<RaycastVehicle>(null);
 
-  const vehicleBodyMesh = useMemo<Mesh>(
-    () => gltf && gltf.scene.children.find(findMeshByName('Body')),
-    gltf
-  );
+  const vehicleBodyMesh =
+    gltf && gltf.scene.children.find(findMeshByName('Body'));
 
   useEffect(() => {
-    if (!gltf) {
-      return () => null;
-    }
+    if (gltf) {
+      const { position, quaternion, geometry } = vehicleBodyMesh;
 
-    const { position, quaternion, geometry } = vehicleBodyMesh;
+      geometry.computeBoundingBox();
+      const { boundingBox } = geometry;
 
-    geometry.computeBoundingBox();
-    const { boundingBox } = geometry;
+      const chassisShape = new Box(new Vec3(2, 1, 0.5));
+      const chassisBody = new Body({ mass: 150 });
+      chassisBody.addShape(chassisShape);
+      chassisBody.position.set(0, 0, 4);
 
-    const chassisShape = new Box(new Vec3(2, 1, 0.5));
-    // const chassisShape = new Box(
-    //   new Vec3(boundingBox.max.x, boundingBox.max.y, boundingBox.max.z)
-    // );
-    const chassisBody = new Body({ mass: 150 });
-    chassisBody.addShape(chassisShape);
-    chassisBody.position.set(0, 0, 4);
-    chassisBody.angularVelocity.set(0, 0, 0.5);
-    // chassisBody.position.set(position.x, position.y, position.z);
-    // chassisBody.quaternion.set(
-    //   quaternion.x,
-    //   quaternion.y,
-    //   quaternion.z,
-    //   quaternion.w
-    // );
-
-    const vehicle = new RaycastVehicle({
-      chassisBody: chassisBody,
-      // indexRightAxis: 0,
-      // indexUpAxis: 1,
-      // indexLeftAxis: 2,
-    });
-
-    const axlewidth = 1;
-
-    wheelInfoOptions.chassisConnectionPointLocal.set(axlewidth, 1, 0);
-    vehicle.addWheel(wheelInfoOptions);
-
-    wheelInfoOptions.chassisConnectionPointLocal.set(axlewidth, -1, 0);
-    vehicle.addWheel(wheelInfoOptions);
-
-    wheelInfoOptions.chassisConnectionPointLocal.set(-axlewidth, 1, 0);
-    vehicle.addWheel(wheelInfoOptions);
-
-    wheelInfoOptions.chassisConnectionPointLocal.set(-axlewidth, -1, 0);
-    vehicle.addWheel(wheelInfoOptions);
-
-    vehicle.addToWorld(world);
-
-    const wheelBodies = [];
-    for (var i = 0; i < vehicle.wheelInfos.length; i++) {
-      var wheel = vehicle.wheelInfos[i];
-      var cylinderShape = new Cylinder(
-        wheel.radius,
-        wheel.radius,
-        wheel.radius / 2,
-        20
-      );
-      var wheelBody = new Body({
-        mass: 0,
+      const vehicle = new RaycastVehicle({
+        chassisBody: chassisBody,
       });
-      wheelBody.type = Body.KINEMATIC;
-      wheelBody.collisionFilterGroup = 0; // turn off collisions
-      var q = new Quaternion();
-      q.setFromAxisAngle(new Vec3(1, 0, 0), Math.PI / 2);
-      wheelBody.addShape(cylinderShape, new Vec3(), q);
-      wheelBodies.push(wheelBody);
-      world.addBody(wheelBody);
-    }
-    // Update wheels
-    world.addEventListener('postStep', function() {
-      vehicle.wheelInfos.forEach((_, index) => {
-        vehicle.updateWheelTransform(index);
-        var t = vehicle.wheelInfos[index].worldTransform;
-        var wheelBody = wheelBodies[index];
-        wheelBody.position.copy(t.position);
-        wheelBody.quaternion.copy(t.quaternion);
-      });
-    });
 
-    setVehicle(vehicle);
+      const axlewidth = 1.4;
+
+      wheelInfoOptions.chassisConnectionPointLocal.set(axlewidth, 1.2, 0);
+      vehicle.addWheel(wheelInfoOptions);
+
+      wheelInfoOptions.chassisConnectionPointLocal.set(axlewidth, -1.2, 0);
+      vehicle.addWheel(wheelInfoOptions);
+
+      wheelInfoOptions.chassisConnectionPointLocal.set(-axlewidth, 1.2, 0);
+      vehicle.addWheel(wheelInfoOptions);
+
+      wheelInfoOptions.chassisConnectionPointLocal.set(-axlewidth, -1.2, 0);
+      vehicle.addWheel(wheelInfoOptions);
+
+      vehicle.addToWorld(world);
+
+      const wheelBodies = [];
+      for (var i = 0; i < vehicle.wheelInfos.length; i++) {
+        var wheel = vehicle.wheelInfos[i];
+        var cylinderShape = new Cylinder(
+          wheel.radius,
+          wheel.radius,
+          wheel.radius / 2,
+          20
+        );
+        var wheelBody = new Body({
+          mass: 0,
+        });
+        wheelBody.type = Body.KINEMATIC;
+        wheelBody.collisionFilterGroup = 0; // turn off collisions
+        var q = new Quaternion();
+        q.setFromAxisAngle(new Vec3(1, 0, 0), Math.PI / 2);
+        wheelBody.addShape(cylinderShape, new Vec3(), q);
+        wheelBodies.push(wheelBody);
+        world.addBody(wheelBody);
+      }
+      // Update wheels
+      world.addEventListener('postStep', function() {
+        vehicle.wheelInfos.forEach((_, index) => {
+          vehicle.updateWheelTransform(index);
+          var t = vehicle.wheelInfos[index].worldTransform;
+          var wheelBody = wheelBodies[index];
+          wheelBody.position.copy(t.position);
+          wheelBody.quaternion.copy(t.quaternion);
+        });
+      });
+
+      setVehicle(vehicle);
+    }
 
     return () => {
-      vehicle.removeFromWorld(world);
+      vehicle && vehicle.removeFromWorld(world);
     };
   }, [gltf]);
 
+  // Should move this to parent component
   const onKeyHandler = useCallback(
     ({ key, type }) => {
       const up = type == 'keyup';
@@ -202,13 +185,19 @@ export const Vehicle: FC<IVehicle> = ({
   useRender(
     () => {
       if (ref.current && vehicle) {
-        // console.log(ref.current.quaternion, vehicle.chassisBody.quaternion);
-        // ref.current.position.copy(vehicle.chassisBody.position);
-        // ref.current.quaternion.copy(vehicle.chassisBody.quaternion);
+        ref.current.position.copy(vehicle.chassisBody.position);
+        ref.current.quaternion.copy(vehicle.chassisBody.quaternion);
       }
     },
     false,
     [vehicle]
+  );
+
+  return (
+    <mesh ref={ref} castShadow receiveShadow>
+      <boxGeometry attach="geometry" args={[4, 2, 1]} />
+      <meshStandardMaterial attach="material" />
+    </mesh>
   );
 
   return gltf ? (
