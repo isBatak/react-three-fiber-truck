@@ -11,6 +11,8 @@
 - glTF Settings for AO
   - https://github.com/KhronosGroup/glTF-Blender-IO/blob/master/addons/io_scene_gltf2/blender/imp/gltf2_blender_map_occlusion.py#L51
 - Space Dust Racing UE4 Arcade Vehicle Physics Tour https://www.youtube.com/watch?v=LG1CtlFRmpU
+- motion blur https://www.clicktorelease.com/tmp/threejs/mblur/
+- google IO demo https://www.clicktorelease.com/code/io15/
 
 # TOOLS
 

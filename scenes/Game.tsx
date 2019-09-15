@@ -1,5 +1,5 @@
 import { FC, memo } from 'react';
-import { Quaternion } from 'three';
+import { Quaternion, Vector3 } from 'three';
 
 import { Vehicle } from '../components/Vehicle';
 import Controls from '../components/Controls';
@@ -9,6 +9,7 @@ import { DirectionalLight } from '../components/DirectionalLight';
 import { AmbientLight } from '../components/AmbientLight';
 import { Cannon } from '../libs/cannon/Cannon';
 import { Logo } from '../components/Logo';
+import { Camera } from '../components/Camera';
 
 interface IGameProps {}
 
@@ -31,7 +32,15 @@ export const Game: FC<IGameProps> = memo(() => {
         <Box position={[2, 4, 13]} /> */}
       </Cannon>
 
-      <Controls
+      <Camera
+        position={[0, -10, 4]}
+        quaternion={new Quaternion().setFromAxisAngle(
+          new Vector3(1, 0, 0),
+          Math.PI / 2.5
+        )}
+      />
+
+      {/* <Controls
         autoRotate={false}
         enablePan={true}
         enableZoom={false}
@@ -40,7 +49,7 @@ export const Game: FC<IGameProps> = memo(() => {
         rotateSpeed={1}
         maxPolarAngle={Math.PI / 3}
         minPolarAngle={Math.PI / 3}
-      />
+      /> */}
     </>
   );
 });

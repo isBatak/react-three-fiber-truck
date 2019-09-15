@@ -10,7 +10,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "ammo": "^3.0.3",
     "cannon": "0.6.2",
     "dts-gen": "^0.5.8",
     "global": "^4.4.0",
@@ -18,12 +17,12 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-three-fiber": "^2.4.3",
+    "react-use": "^12.2.0",
     "three": "0.108.0",
     "why-did-you-update": "^1.0.6"
   },
   "devDependencies": {
-    "@types/cannon": "^0.1.4",
-    "@types/node": "^12.7.4",
+    "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.3.0",
@@ -31,7 +30,7 @@
     "next-compose-plugins": "2.2.0",
     "next-transpile-modules": "2.3.1",
     "prettier": "^1.18.2",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.3"
   },
   "keywords": []
 }

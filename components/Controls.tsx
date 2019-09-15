@@ -10,7 +10,7 @@ const Controls = (props) => {
 
   useRender(() => {
     ref.current && ref.current.update();
-    scene.scale.set(0.25, 0.25, 0.25);
+    // scene.scale.set(0.25, 0.25, 0.25);
   });
 
   // @ts-ignore

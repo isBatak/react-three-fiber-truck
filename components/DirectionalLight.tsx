@@ -1,12 +1,13 @@
-import React, { FC, useMemo } from 'react';
-import { Vector3, Color } from 'three';
+import React, { FC } from 'react';
+import { ReactThreeFiber } from 'react-three-fiber';
+import { Color } from 'three';
 
 export interface IDirectionalLight {
-  color?: Color;
+  color?: any;
   intensity?: number;
   width?: number;
   height?: number;
-  position?: Vector3;
+  position?: ReactThreeFiber.Vector3;
   lookAt?: Array<number>;
   castShadow?: boolean;
 }

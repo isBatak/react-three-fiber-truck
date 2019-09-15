@@ -20,7 +20,7 @@ export function useCannon({ ...props }, fn, deps = []) {
   useRender(() => {
     if (ref.current) {
       ref.current.position.copy(body.position);
-      // ref.current.quaternion.copy(body.quaternion);
+      ref.current.quaternion.copy(body.quaternion);
     }
   });
 
