@@ -10,6 +10,7 @@ import { AmbientLight } from '../components/AmbientLight';
 import { Cannon } from '../libs/cannon/Cannon';
 import { Logo } from '../components/Logo';
 import { Camera } from '../components/Camera';
+import { Effect } from '../components/Effects';
 
 interface IGameProps {}
 
@@ -39,6 +40,8 @@ export const Game: FC<IGameProps> = memo(() => {
           Math.PI / 2.5
         )}
       />
+
+      <Effect />
 
       {/* <Controls
         autoRotate={false}
