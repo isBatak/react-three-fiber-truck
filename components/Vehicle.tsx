@@ -11,18 +11,9 @@ const findMeshByName = (name: string) => (item: Mesh) => item.name === name;
 export interface IVehicle {
   url: String;
   raycastVehicle: RaycastVehicle;
-  // maxSteerValue?: number;
-  // maxForce?: number;
-  // brakeForce?: number;
 }
 
-export const Vehicle: FC<IVehicle> = ({
-  url,
-  raycastVehicle,
-  // maxSteerValue = 0.5,
-  // maxForce = 1000,
-  // brakeForce = 1000000,
-}) => {
+export const Vehicle: FC<IVehicle> = ({ url, raycastVehicle }) => {
   // @ts-ignore
   const gltf = useLoader<GLTF>(GLTFLoader, url);
 

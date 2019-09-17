@@ -30,7 +30,7 @@ export const Game: FC<IGameProps> = () => {
       />
 
       {/* <Logo url="/static/models/logo.gltf" /> */}
-      <Ground color="#FBDF90" />
+      <Ground url="./static/textures/grid.png" />
 
       {/* <Box position={[1, 4, 1]} />
       <Box position={[2, 4, 5]} />
