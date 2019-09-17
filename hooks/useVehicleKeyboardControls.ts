@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { RaycastVehicle } from 'cannon';
+import { RaycastVehicle, Vec3 } from 'cannon';
 import { useEvent } from './useEvent';
 
 export const useVehicleKeyboardControls = (
