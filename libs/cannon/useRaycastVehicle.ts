@@ -28,7 +28,7 @@ const wheelInfoOptions: IWheelInfoOptions = {
   useCustomSlidingRotationalSpeed: true,
 };
 
-function createRaycastVehicle() {
+function createRaycastVehicle(): RaycastVehicle {
   const chassisShape = new Box(new Vec3(2, 1, 0.5));
   const chassisBody = new Body({ mass: 150 });
   chassisBody.addShape(chassisShape);
@@ -57,7 +57,7 @@ function createRaycastVehicle() {
 
 export function useRaycastVehicle() {
   const world = useContext<World>(CannonContext);
-  const [vehicle] = useState(() => createRaycastVehicle());
+  const [vehicle] = useState<RaycastVehicle>(() => createRaycastVehicle());
 
   useEffect(() => {
     vehicle.addToWorld(world);

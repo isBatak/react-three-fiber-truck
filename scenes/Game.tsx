@@ -6,17 +6,18 @@ import { Ground } from '../components/Ground';
 import { Box } from '../components/Box';
 import { DirectionalLight } from '../components/DirectionalLight';
 import { AmbientLight } from '../components/AmbientLight';
-import { Cannon } from '../libs/cannon/Cannon';
 import { Logo } from '../components/Logo';
 import { Camera } from '../components/Camera';
 import { Effect } from '../components/Effects';
-import { VehicleKeyboardControls } from '../components/VehicleKeyboardControls';
 import { useRaycastVehicle } from '../libs/cannon/useRaycastVehicle';
+import { useVehicleKeyboardControls } from '../hooks/useVehicleKeyboardControls';
 
 interface IGameProps {}
 
 export const Game: FC<IGameProps> = () => {
   const raycastVehicle = useRaycastVehicle();
+
+  useVehicleKeyboardControls(raycastVehicle);
 
   return (
     <>
@@ -27,7 +28,7 @@ export const Game: FC<IGameProps> = () => {
         url="/static/models/truck.gltf"
         raycastVehicle={raycastVehicle}
       />
-      <VehicleKeyboardControls raycastVehicle={raycastVehicle} />
+
       {/* <Logo url="/static/models/logo.gltf" /> */}
       <Ground color="#FBDF90" />
 
