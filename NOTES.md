@@ -45,3 +45,7 @@
 - physics engine
 - three.js dev-tools plugin
 - demo
+- tutorials
+  - 3D Modeling for Complete Beginners - Blender 2.8 https://www.youtube.com/watch?v=jBqYTgaFDxU
+  - react-three-fiber https://www.youtube.com/watch?v=1rP3nNY2hTo
+  - Three.js https://tympanus.net/codrops/2019/09/17/how-to-build-a-color-customizer-app-for-a-3d-model-with-three-js/
