@@ -1,20 +1,17 @@
 import React, { useRef } from 'react';
 import { useThree, useRender, extend } from 'react-three-fiber';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-extend({ OrbitControls });
+extend({ ThreeOrbitControls });
 
-const Controls = (props) => {
-  const { camera, scene } = useThree();
+export const OrbitControls = (props) => {
+  const { camera } = useThree();
   const ref = useRef(null);
 
   useRender(() => {
     ref.current && ref.current.update();
-    // scene.scale.set(0.25, 0.25, 0.25);
   });
 
   // @ts-ignore
   return <orbitControls ref={ref} args={[camera]} {...props} />;
 };
-
-export default Controls;

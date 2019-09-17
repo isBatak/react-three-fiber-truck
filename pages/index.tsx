@@ -4,6 +4,7 @@ import { CanvasProps } from 'react-three-fiber';
 import { Vector3 } from 'three';
 
 import { Game } from '../scenes/Game';
+import { Cannon } from '../libs/cannon/Cannon';
 
 const DynamicCanvasNoSSR = dynamic<CanvasProps>(
   () => import('react-three-fiber').then((mod) => mod.Canvas),
@@ -23,7 +24,9 @@ const Index = () => (
         gl.gammaOutput = true;
       }}
     >
-      <Game />
+      <Cannon debug>
+        <Game />
+      </Cannon>
     </DynamicCanvasNoSSR>
     <style global jsx>
       {`

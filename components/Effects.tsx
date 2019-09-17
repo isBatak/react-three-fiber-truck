@@ -28,5 +28,6 @@ export const Effect = () => {
   useRender(() => {
     bloom.render();
   });
+
   return null;
 };
