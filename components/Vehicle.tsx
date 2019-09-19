@@ -1,9 +1,10 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, forwardRef, ReactNode } from 'react';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { RaycastVehicle } from 'cannon';
+import composeRefs from '@seznam/compose-react-refs';
 
 import { useLoader } from '../hooks/useLoader';
-import { Mesh } from 'three';
+import { Mesh, Object3D } from 'three';
 import { useRender } from 'react-three-fiber';
 
 const findMeshByName = (name: string) => (item: Mesh) => item.name === name;
@@ -11,36 +12,52 @@ const findMeshByName = (name: string) => (item: Mesh) => item.name === name;
 export interface IVehicle {
   url: String;
   raycastVehicle: RaycastVehicle;
+  children?: ReactNode;
 }
 
-export const Vehicle: FC<IVehicle> = ({ url, raycastVehicle }) => {
-  // @ts-ignore
-  const gltf = useLoader<GLTF>(GLTFLoader, url);
+export const Vehicle = forwardRef<Object3D, IVehicle>(
+  ({ url, raycastVehicle, children }, ref) => {
+    // @ts-ignore
+    const gltf = useLoader<GLTF>(GLTFLoader, url);
 
-  const vehicleBodyMesh =
-    gltf && gltf.scene.children.find(findMeshByName('Body'));
+    const vehicleBodyMesh =
+      gltf && gltf.scene.children.find(findMeshByName('Body'));
 
-  const ref = useRef<Mesh>(null);
+    const localRef = useRef<Mesh>(null);
 
-  useRender(
-    () => {
-      if (ref.current && raycastVehicle) {
-        ref.current.position.copy(raycastVehicle.chassisBody.position);
-        ref.current.quaternion.copy(raycastVehicle.chassisBody.quaternion);
-      }
-    },
-    false,
-    [ref, raycastVehicle]
-  );
+    useRender(
+      () => {
+        // @ts-ignore
+        if (ref.current && raycastVehicle) {
+          // @ts-ignore
+          localRef.current.position.copy(raycastVehicle.chassisBody.position);
+          // @ts-ignore
+          localRef.current.quaternion.copy(
+            raycastVehicle.chassisBody.quaternion
+          );
+        }
+      },
+      false,
+      [ref, raycastVehicle]
+    );
 
-  return (
-    <mesh ref={ref} castShadow receiveShadow>
-      <boxGeometry attach="geometry" args={[4, 2, 1]} />
-      <meshStandardMaterial attach="material" />
-    </mesh>
-  );
+    return (
+      <mesh ref={composeRefs(localRef, ref)} castShadow receiveShadow>
+        <boxGeometry attach="geometry" args={[2, 1, 4]} />
+        <meshStandardMaterial attach="material" />
+        {children}
+      </mesh>
+    );
 
-  return gltf ? (
-    <mesh ref={ref} name="Body" {...vehicleBodyMesh} castShadow />
-  ) : null;
-};
+    return gltf ? (
+      <mesh
+        ref={composeRefs(localRef, ref)}
+        name="Body"
+        {...vehicleBodyMesh}
+        castShadow
+      >
+        {children}
+      </mesh>
+    ) : null;
+  }
+);

@@ -13,6 +13,7 @@
 - Space Dust Racing UE4 Arcade Vehicle Physics Tour https://www.youtube.com/watch?v=LG1CtlFRmpU
 - motion blur https://www.clicktorelease.com/tmp/threejs/mblur/
 - google IO demo https://www.clicktorelease.com/code/io15/
+- follow camera https://jsfiddle.net/Fyrestar/6519yedL/
 
 # TOOLS
 
@@ -49,3 +50,4 @@
   - 3D Modeling for Complete Beginners - Blender 2.8 https://www.youtube.com/watch?v=jBqYTgaFDxU
   - react-three-fiber https://www.youtube.com/watch?v=1rP3nNY2hTo
   - Three.js https://tympanus.net/codrops/2019/09/17/how-to-build-a-color-customizer-app-for-a-3d-model-with-three-js/
+- react native expo https://expo.io/@birkir/react-three-fiber-example

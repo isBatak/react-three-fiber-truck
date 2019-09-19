@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@seznam/compose-react-refs": "^1.0.2",
     "cannon": "0.6.2",
     "dts-gen": "^0.5.8",
     "global": "^4.4.0",

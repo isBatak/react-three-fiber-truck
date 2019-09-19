@@ -1,25 +1,40 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, FC } from 'react';
 import { Plane, Body } from 'cannon';
-import { TextureLoader, Texture, RepeatWrapping } from 'three';
+import { TextureLoader, Texture, RepeatWrapping, Quaternion } from 'three';
 
 import { CannonContext } from '../libs/cannon/Cannon';
 import { useLoader } from '../hooks/useLoader';
 
-export const Ground = ({ width = 100, height = 100, url }) => {
+interface IGroundProps {
+  width?: number;
+  height?: number;
+  quaternion?: Quaternion;
+  url: string;
+}
+
+export const Ground: FC<IGroundProps> = ({
+  width = 100,
+  height = 100,
+  url,
+  quaternion,
+}) => {
   const world = useContext(CannonContext);
 
   useEffect(() => {
+    const plane = new Plane();
     const groundBody = new Body({
       mass: 0,
-      shape: new Plane(),
+      shape: plane,
     });
+
+    groundBody.quaternion.copy(quaternion);
 
     world.addBody(groundBody);
 
     return () => {
       world.remove(groundBody);
     };
-  }, []);
+  }, [world, quaternion]);
 
   // @ts-ignore
   const texture = useLoader<Texture>(TextureLoader, url);
@@ -32,7 +47,7 @@ export const Ground = ({ width = 100, height = 100, url }) => {
   }
 
   return (
-    <mesh receiveShadow>
+    <mesh quaternion={quaternion} receiveShadow>
       <planeBufferGeometry attach="geometry" args={[width, height]} />
       <meshLambertMaterial attach="material" map={texture} />
     </mesh>

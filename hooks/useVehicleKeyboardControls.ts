@@ -42,6 +42,11 @@ export const useVehicleKeyboardControls = (
           vehicle.setBrake(brakeForce, 1);
           vehicle.setBrake(brakeForce, 2);
           vehicle.setBrake(brakeForce, 3);
+        case ' ': // space
+          vehicle.chassisBody.applyImpulse(
+            new Vec3(0, 100, 0),
+            new Vec3(0, 0, 1)
+          );
           break;
       }
     },
