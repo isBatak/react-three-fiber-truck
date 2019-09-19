@@ -546,10 +546,22 @@ declare module 'cannon' {
   }
 
   export interface IRaycastVehicleOptions {
+    /**
+     * The car chassis body.
+     */
     chassisBody?: Body;
+    /**
+     * Axis to use for right. x=0, y=1, z=2
+     */
     indexRightAxis?: number;
-    indexLeftAxis?: number;
+    /**
+     * Axis to use for up. x=0, y=1, z=2
+     */
     indexUpAxis?: number;
+    /**
+     * Axis to use for forward. x=0, y=1, z=2
+     */
+    indexForwardAxis?: number;
   }
 
   export interface IWheelInfoOptions {
@@ -580,6 +592,10 @@ declare module 'cannon' {
     maxSuspensionTravel?: number;
     useCustomSlidingRotationalSpeed?: boolean;
     customSlidingRotationalSpeed?: number;
+    worldTransform?: {
+      position: Vec3;
+      quaternion: Quaternion;
+    };
 
     position?: Vec3;
     direction?: Vec3;
@@ -627,6 +643,9 @@ declare module 'cannon' {
     constructor(options?: IWheelInfoOptions);
   }
 
+  /**
+   * Vehicle helper class that casts rays from the wheel positions towards the ground and applies forces.
+   * */
   export class RaycastVehicle {
     chassisBody: Body;
     wheelInfos: IWheelInfoOptions[];
@@ -636,6 +655,9 @@ declare module 'cannon' {
     indexForwardAxis: number;
     indexUpAxis: number;
 
+    /**
+     * Vehicle helper class that casts rays from the wheel positions towards the ground and applies forces.
+     */
     constructor(options?: IRaycastVehicleOptions);
 
     addWheel(options?: IWheelInfoOptions): void;

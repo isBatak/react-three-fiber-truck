@@ -8,7 +8,6 @@ import { useLoader } from '../hooks/useLoader';
 interface IGroundProps {
   width?: number;
   height?: number;
-  quaternion?: Quaternion;
   url: string;
 }
 
@@ -16,7 +15,6 @@ export const Ground: FC<IGroundProps> = ({
   width = 100,
   height = 100,
   url,
-  quaternion,
 }) => {
   const world = useContext(CannonContext);
 
@@ -27,14 +25,12 @@ export const Ground: FC<IGroundProps> = ({
       shape: plane,
     });
 
-    groundBody.quaternion.copy(quaternion);
-
     world.addBody(groundBody);
 
     return () => {
       world.remove(groundBody);
     };
-  }, [world, quaternion]);
+  }, [world]);
 
   // @ts-ignore
   const texture = useLoader<Texture>(TextureLoader, url);
@@ -47,7 +43,7 @@ export const Ground: FC<IGroundProps> = ({
   }
 
   return (
-    <mesh quaternion={quaternion} receiveShadow>
+    <mesh receiveShadow>
       <planeBufferGeometry attach="geometry" args={[width, height]} />
       <meshLambertMaterial attach="material" map={texture} />
     </mesh>

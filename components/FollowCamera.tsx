@@ -15,7 +15,6 @@ export const FollowCamera: FC<IFollowCamera> = ({ target, cameraDummy }) => {
   useRender(
     () => {
       if (camera.current && target.current && cameraDummy.current) {
-        console.log(camera.current);
         const temp = new Vector3().setFromMatrixPosition(
           cameraDummy.current.matrixWorld
         );

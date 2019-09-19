@@ -34,17 +34,15 @@ export const Game: FC<IGameProps> = () => {
       >
         {/*
         // @ts-ignore */}
-        <object3D ref={cameraDummy} name="CameraDummy" position={[0, 4, -10]} />
+        <object3D
+          ref={cameraDummy}
+          name="CameraDummy"
+          position={[-10, 0, 10]}
+        />
       </Vehicle>
 
       {/* <Logo url="/static/models/logo.gltf" /> */}
-      <Ground
-        url="./static/textures/grid.png"
-        quaternion={new Quaternion().setFromAxisAngle(
-          new Vector3(-1, 0, 0),
-          Math.PI / 2
-        )}
-      />
+      <Ground url="./static/textures/grid.png" />
 
       {/* <Box position={[1, 4, 1]} />
       <Box position={[2, 4, 5]} />
@@ -53,7 +51,7 @@ export const Game: FC<IGameProps> = () => {
       <Box position={[-2, 4, 13]} />
       <Box position={[2, 4, 13]} /> */}
 
-      {/* <FollowCamera target={vehicle} cameraDummy={cameraDummy} /> */}
+      <FollowCamera target={vehicle} cameraDummy={cameraDummy} />
 
       <Effect />
 

@@ -15,8 +15,8 @@ export interface IDirectionalLight {
 export const DirectionalLight: FC<IDirectionalLight> = ({
   color,
   intensity = 1,
-  position = [3, 4, 10],
-  lookAt = [400, 4, 400],
+  position = [3, 10, 4],
+  lookAt = [0, 0, 0],
   castShadow = true,
 }) => (
   <directionalLight

@@ -13,7 +13,7 @@ export interface ICannonProps {
 
 export const Cannon: FC<ICannonProps> = ({
   solverIterations = 10,
-  gravity = new Vec3(0, -10, 0),
+  gravity = new Vec3(0, 0, -10),
   debug,
   children,
 }) => {
