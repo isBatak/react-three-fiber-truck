@@ -18,8 +18,7 @@ export const FollowCamera: FC<IFollowCamera> = ({ target, cameraDummy }) => {
         const temp = new Vector3().setFromMatrixPosition(
           cameraDummy.current.matrixWorld
         );
-        camera.current.position.lerp(temp, 0.2);
-        // camera.current.position.lerp(temp, 0.05);
+        camera.current.position.lerp(temp, 0.05);
         camera.current.lookAt(target.current.position);
       }
     },

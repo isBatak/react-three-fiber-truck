@@ -22,8 +22,8 @@ export const useVehicleKeyboardControls = (
 
       switch (key) {
         case 'w': // forward
-          vehicle.applyEngineForce(up ? 0 : -maxForce, 2);
-          vehicle.applyEngineForce(up ? 0 : -maxForce, 3);
+          vehicle.applyEngineForce(up ? 0 : -maxForce, 0);
+          vehicle.applyEngineForce(up ? 0 : -maxForce, 1);
           break;
         case 's': // backward
           vehicle.applyEngineForce(up ? 0 : maxForce, 2);
@@ -44,7 +44,7 @@ export const useVehicleKeyboardControls = (
           vehicle.setBrake(brakeForce, 3);
         case ' ': // space
           vehicle.chassisBody.applyImpulse(
-            new Vec3(0, 100, 0),
+            new Vec3(0, 0, 100),
             new Vec3(0, 0, 1)
           );
           break;

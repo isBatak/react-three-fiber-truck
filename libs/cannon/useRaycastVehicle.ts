@@ -29,7 +29,7 @@ const wheelInfoOptions: IWheelInfoOptions = {
 };
 
 function createRaycastVehicle(): RaycastVehicle {
-  const chassisShape = new Box(new Vec3(2, 1, 0.5));
+  const chassisShape = new Box(new Vec3(2.4, 1.65, 1));
   const chassisBody = new Body({
     mass: 150,
   });
@@ -40,16 +40,16 @@ function createRaycastVehicle(): RaycastVehicle {
     chassisBody: chassisBody,
   });
 
-  wheelInfoOptions.chassisConnectionPointLocal.set(1, 1, 0);
+  wheelInfoOptions.chassisConnectionPointLocal.set(1.5, 1.57, -1);
   vehicle.addWheel(wheelInfoOptions);
 
-  wheelInfoOptions.chassisConnectionPointLocal.set(1, -1, 0);
+  wheelInfoOptions.chassisConnectionPointLocal.set(1.5, -1.57, -1);
   vehicle.addWheel(wheelInfoOptions);
 
-  wheelInfoOptions.chassisConnectionPointLocal.set(-1, 1, 0);
+  wheelInfoOptions.chassisConnectionPointLocal.set(-1.75, 1.57, -1);
   vehicle.addWheel(wheelInfoOptions);
 
-  wheelInfoOptions.chassisConnectionPointLocal.set(-1, -1, 0);
+  wheelInfoOptions.chassisConnectionPointLocal.set(-1.75, -1.57, -1);
   vehicle.addWheel(wheelInfoOptions);
 
   return vehicle;

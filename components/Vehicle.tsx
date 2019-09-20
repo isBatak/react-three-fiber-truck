@@ -51,13 +51,13 @@ export const Vehicle = forwardRef<Object3D, IVehicle>(
       [localRef, raycastVehicle]
     );
 
-    return (
-      <mesh ref={composeRefs(localRef, ref)} castShadow receiveShadow>
-        <boxGeometry attach="geometry" args={[4, 2, 1]} />
-        <meshStandardMaterial attach="material" />
-        {children}
-      </mesh>
-    );
+    // return (
+    //   <mesh ref={composeRefs(localRef, ref)} castShadow receiveShadow>
+    //     <boxGeometry attach="geometry" args={[4, 2, 1]} />
+    //     <meshStandardMaterial attach="material" />
+    //     {children}
+    //   </mesh>
+    // );
 
     return gltf ? (
       <mesh

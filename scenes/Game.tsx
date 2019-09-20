@@ -34,22 +34,18 @@ export const Game: FC<IGameProps> = () => {
       >
         {/*
         // @ts-ignore */}
-        <object3D
-          ref={cameraDummy}
-          name="CameraDummy"
-          position={[-10, 0, 10]}
-        />
+        <object3D ref={cameraDummy} name="CameraDummy" position={[-10, 0, 5]} />
       </Vehicle>
 
       {/* <Logo url="/static/models/logo.gltf" /> */}
       <Ground url="./static/textures/grid.png" />
 
-      {/* <Box position={[1, 4, 1]} />
+      <Box position={[1, 4, 1]} />
       <Box position={[2, 4, 5]} />
       <Box position={[0, 4, 6]} />
       <Box position={[-1, 4, 8]} />
       <Box position={[-2, 4, 13]} />
-      <Box position={[2, 4, 13]} /> */}
+      <Box position={[2, 4, 13]} />
 
       <FollowCamera target={vehicle} cameraDummy={cameraDummy} />
 
