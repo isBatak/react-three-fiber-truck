@@ -12,6 +12,5 @@ export const OrbitControls = (props) => {
     ref.current && ref.current.update();
   });
 
-  // @ts-ignore
   return <orbitControls ref={ref} args={[camera]} {...props} />;
 };

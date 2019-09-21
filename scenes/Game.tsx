@@ -10,7 +10,8 @@ import { Effect } from '../components/Effects';
 import { useRaycastVehicle } from '../libs/cannon/useRaycastVehicle';
 import { useVehicleKeyboardControls } from '../hooks/useVehicleKeyboardControls';
 import { FollowCamera } from '../components/FollowCamera';
-import { Object3D, Vector3, Quaternion } from 'three';
+import { Object3D, Vector3 } from 'three';
+import { Sky } from '../components/Sky';
 
 interface IGameProps {}
 
@@ -26,6 +27,7 @@ export const Game: FC<IGameProps> = () => {
     <>
       <AmbientLight intensity={0.4} />
       <DirectionalLight />
+      <Sky />
 
       <Vehicle
         ref={vehicle}
@@ -51,7 +53,7 @@ export const Game: FC<IGameProps> = () => {
 
       <Effect />
 
-      <axesHelper position={[0, 0.01, 0]} />
+      <axesHelper position={[0, 0, 0.01]} />
     </>
   );
 };
