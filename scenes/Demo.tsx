@@ -9,10 +9,8 @@ export const Demo: FC<IDemoProps> = () => {
 
   useRender(
     () => {
-      if (cube.current) {
-        cube.current.rotation.x += 0.005;
-        cube.current.rotation.y += 0.01;
-      }
+      cube.current.rotation.x += 0.005;
+      cube.current.rotation.y += 0.01;
     },
     false,
     [cube]
