@@ -19,7 +19,7 @@ const DynamicCanvasNoSSR = dynamic<CanvasProps>(
 const Index = () => (
   <main>
     <DynamicCanvasNoSSR
-      camera={{ position: new Vector3(0, 0, 100) }}
+      camera={{ position: new Vector3(0, 0, 400) }}
       shadowMap
       onCreated={({ gl }) => {
         gl.gammaFactor = 2.2;

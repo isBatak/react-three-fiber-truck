@@ -29,7 +29,7 @@ export const Demo: FC<IDemoProps> = () => {
 
   return (
     <mesh ref={cube} material={materials}>
-      <boxBufferGeometry attach="geometry" args={[60, 60, 60]} />
+      <boxBufferGeometry attach="geometry" args={[200, 200, 200]} />
     </mesh>
   );
 };
