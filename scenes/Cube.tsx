@@ -1,6 +1,6 @@
 import { FC, useRef } from 'react';
 import { useRender } from 'react-three-fiber';
-import { Mesh, MeshBasicMaterial } from 'three';
+import { Mesh } from 'three';
 
 interface IDemoProps {}
 
