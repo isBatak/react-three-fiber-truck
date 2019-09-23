@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { CanvasProps } from 'react-three-fiber';
 import { Vector3 } from 'three';
 
-import { Demo } from '../scenes/Demo';
+import { Cube } from '../scenes/Cube';
 import { Game } from '../scenes/Game';
 import { Cannon } from '../libs/cannon/Cannon';
 import { Stats2 } from '../components/Stats';
@@ -30,7 +30,7 @@ const Index = () => (
       {/* <Cannon debug>
         <Game />
       </Cannon> */}
-      <Demo />
+      <Cube />
     </DynamicCanvasNoSSR>
     <style global jsx>
       {`
