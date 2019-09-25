@@ -27,10 +27,10 @@ const Index = () => (
       }}
     >
       <Stats2 />
-      {/* <Cannon debug>
+      <Cannon>
         <Game />
-      </Cannon> */}
-      <Cube />
+      </Cannon>
+      {/* <Cube /> */}
     </DynamicCanvasNoSSR>
     <style global jsx>
       {`

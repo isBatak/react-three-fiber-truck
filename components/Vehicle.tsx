@@ -114,10 +114,10 @@ export const Vehicle = forwardRef<Object3D, IVehicle>(
         >
           {children}
         </mesh>
-        <mesh ref={vehicleTireFRRef} {...vehicleTireFRMesh} />
-        <mesh ref={vehicleTireFLRef} {...vehicleTireFLMesh} />
-        <mesh ref={vehicleTireBRRef} {...vehicleTireBRMesh} />
-        <mesh ref={vehicleTireBLRef} {...vehicleTireBLMesh} />
+        <mesh ref={vehicleTireFRRef} {...vehicleTireFRMesh} castShadow />
+        <mesh ref={vehicleTireFLRef} {...vehicleTireFLMesh} castShadow />
+        <mesh ref={vehicleTireBRRef} {...vehicleTireBRMesh} castShadow />
+        <mesh ref={vehicleTireBLRef} {...vehicleTireBLMesh} castShadow />
         {/* <mesh ref={vehicleSteeringWheelRef} {...vehicleSteeringWheelMesh} /> */}
       </group>
     ) : null;

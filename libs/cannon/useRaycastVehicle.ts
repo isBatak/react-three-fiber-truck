@@ -12,7 +12,7 @@ import {
 } from 'cannon';
 
 const wheelInfoOptions: IWheelInfoOptions = {
-  radius: 0.5,
+  radius: 0.7,
   directionLocal: new Vec3(0, 0, -1),
   suspensionStiffness: 30,
   suspensionRestLength: 0.3,
@@ -65,12 +65,7 @@ export function useRaycastVehicle() {
     const wheelBodies: Array<Body> = [];
     for (var i = 0; i < vehicle.wheelInfos.length; i++) {
       var wheel = vehicle.wheelInfos[i];
-      var cylinderShape = new Cylinder(
-        wheel.radius,
-        wheel.radius,
-        wheel.radius / 2,
-        20
-      );
+      var cylinderShape = new Cylinder(wheel.radius, wheel.radius, 0.6, 20);
       var wheelBody = new Body({
         mass: 0,
       });

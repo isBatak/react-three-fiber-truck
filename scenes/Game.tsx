@@ -25,7 +25,7 @@ export const Game: FC<IGameProps> = () => {
 
   return (
     <>
-      <AmbientLight intensity={0.4} />
+      <AmbientLight intensity={0.3} />
       <DirectionalLight />
       <Sky />
 
