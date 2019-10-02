@@ -1,5 +1,5 @@
 import { useRef, useEffect, FC, RefObject } from 'react';
-import { useThree, useRender } from 'react-three-fiber';
+import { useThree, useFrame } from 'react-three-fiber';
 import { Vector3, Camera, Object3D } from 'three';
 
 interface IFollowCamera {
@@ -12,18 +12,14 @@ export const FollowCamera: FC<IFollowCamera> = ({ target, cameraDummy }) => {
   const { setDefaultCamera } = useThree();
   // @ts-ignore
   useEffect(() => setDefaultCamera(camera.current), []);
-  useRender(
-    () => {
-      if (camera.current && target.current && cameraDummy.current) {
-        const temp = new Vector3().setFromMatrixPosition(
-          cameraDummy.current.matrixWorld
-        );
-        camera.current.position.lerp(temp, 0.05);
-        camera.current.lookAt(target.current.position);
-      }
-    },
-    false,
-    [camera, target, cameraDummy]
-  );
+  useFrame(() => {
+    if (camera.current && target.current && cameraDummy.current) {
+      const temp = new Vector3().setFromMatrixPosition(
+        cameraDummy.current.matrixWorld
+      );
+      camera.current.position.lerp(temp, 0.05);
+      camera.current.lookAt(target.current.position);
+    }
+  });
   return <perspectiveCamera ref={camera} />;
 };

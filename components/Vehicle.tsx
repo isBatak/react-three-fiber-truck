@@ -5,7 +5,7 @@ import composeRefs from '@seznam/compose-react-refs';
 
 import { useLoader } from '../hooks/useLoader';
 import { Mesh, Object3D, Quaternion, Vector3 } from 'three';
-import { useRender } from 'react-three-fiber';
+import { useFrame } from 'react-three-fiber';
 
 const findMeshByName = (name: string) => (item: Mesh) => item.name === name;
 
@@ -80,29 +80,17 @@ export const Vehicle = forwardRef<Object3D, IVehicle>(
     const vehicleTireBLRef = useRef<Mesh>(null);
     // const vehicleSteeringWheelRef = useRef<Mesh>(null);
 
-    useRender(
-      () => {
-        // @ts-ignore
-        if (localVehicleBodyRef.current && raycastVehicle) {
-          updateBody(raycastVehicle, localVehicleBodyRef);
+    useFrame(() => {
+      // @ts-ignore
+      if (localVehicleBodyRef.current && raycastVehicle) {
+        updateBody(raycastVehicle, localVehicleBodyRef);
 
-          updateWheel(0, raycastVehicle, vehicleTireFLRef);
-          updateWheel(1, raycastVehicle, vehicleTireFRRef);
-          updateWheel(2, raycastVehicle, vehicleTireBLRef);
-          updateWheel(3, raycastVehicle, vehicleTireBRRef);
-        }
-      },
-      false,
-      [
-        localVehicleBodyRef,
-        vehicleTireFRRef,
-        vehicleTireFLRef,
-        vehicleTireBRRef,
-        vehicleTireBLRef,
-        // vehicleSteeringWheelRef,
-        raycastVehicle,
-      ]
-    );
+        updateWheel(0, raycastVehicle, vehicleTireFLRef);
+        updateWheel(1, raycastVehicle, vehicleTireFRRef);
+        updateWheel(2, raycastVehicle, vehicleTireBLRef);
+        updateWheel(3, raycastVehicle, vehicleTireBRRef);
+      }
+    });
 
     return gltf ? (
       <group>

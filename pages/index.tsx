@@ -1,6 +1,5 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
-import { CanvasProps } from 'react-three-fiber';
+import { Canvas } from 'react-three-fiber';
 import { Vector3 } from 'three';
 
 import { Cube } from '../scenes/Cube';
@@ -8,17 +7,9 @@ import { Game } from '../scenes/Game';
 import { Cannon } from '../libs/cannon/Cannon';
 import { Stats2 } from '../components/Stats';
 
-const DynamicCanvasNoSSR = dynamic<CanvasProps>(
-  () => import('react-three-fiber').then((mod) => mod.Canvas),
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  }
-);
-
 const Index = () => (
   <main>
-    <DynamicCanvasNoSSR
+    <Canvas
       camera={{ position: new Vector3(0, 0, 400) }}
       shadowMap
       onCreated={({ gl }) => {
@@ -31,7 +22,7 @@ const Index = () => (
         <Game />
       </Cannon>
       {/* <Cube /> */}
-    </DynamicCanvasNoSSR>
+    </Canvas>
     <style global jsx>
       {`
         body {

@@ -1,5 +1,5 @@
 import { FC, useRef } from 'react';
-import { useRender } from 'react-three-fiber';
+import { useFrame } from 'react-three-fiber';
 import { Mesh } from 'three';
 
 interface IDemoProps {}
@@ -7,14 +7,10 @@ interface IDemoProps {}
 export const Cube: FC<IDemoProps> = () => {
   const cube = useRef<Mesh>(null);
 
-  useRender(
-    () => {
-      cube.current.rotation.x += 0.005;
-      cube.current.rotation.y += 0.01;
-    },
-    false,
-    [cube]
-  );
+  useFrame(() => {
+    cube.current.rotation.x += 0.005;
+    cube.current.rotation.y += 0.01;
+  });
 
   return (
     <mesh ref={cube}>
