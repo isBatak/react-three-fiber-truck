@@ -1,8 +1,6 @@
 import React from 'react';
 import { Canvas } from 'react-three-fiber';
-import { Vector3 } from 'three';
 
-import { Cube } from '../scenes/Cube';
 import { Game } from '../scenes/Game';
 import { Cannon } from '../libs/cannon/Cannon';
 import { Stats2 } from '../components/Stats';
@@ -10,7 +8,6 @@ import { Stats2 } from '../components/Stats';
 const Index = () => (
   <main>
     <Canvas
-      camera={{ position: new Vector3(0, 0, 400) }}
       shadowMap
       onCreated={({ gl }) => {
         gl.gammaFactor = 2.2;
@@ -21,7 +18,6 @@ const Index = () => (
       <Cannon>
         <Game />
       </Cannon>
-      {/* <Cube /> */}
     </Canvas>
     <style global jsx>
       {`
