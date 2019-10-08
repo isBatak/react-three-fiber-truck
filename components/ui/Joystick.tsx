@@ -7,7 +7,7 @@ function distance(dot1, dot2) {
   return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 }
 
-function limit(x, y, radius) {
+function limit(x, y, radius): IJoystickPosition {
   const dist = distance([x, y], [0, 0]);
   if (dist <= radius) {
     return { x, y };
@@ -20,32 +20,44 @@ function limit(x, y, radius) {
   }
 }
 
-function direction(atan2: number) {
-  if (atan2 > 2.35619449 || atan2 < -2.35619449) {
-    return 'FORWARD';
-  } else if (atan2 < 2.35619449 && atan2 > 0.785398163) {
-    return 'RIGHT';
-  } else if (atan2 < -0.785398163) {
-    return 'LEFT';
-  }
-  return 'BACKWARD';
-}
+export type Axis = 'x' | 'y';
+
+export type IJoystickPosition = Record<Axis, number>;
 
 interface IJoystickProps {
   radius?: number;
+  lockAxis?: Axis;
+  onChange?(position: IJoystickPosition): void;
 }
 
-export const Joystick: FC<IJoystickProps> = ({ radius = 40 }) => {
-  const [{ x, y }, setCoordinates] = useState(() => ({ x: 0, y: 0 }));
+export const Joystick: FC<IJoystickProps> = ({
+  radius = 40,
+  lockAxis,
+  onChange,
+}) => {
+  const [{ x, y }, setPosition] = useState<IJoystickPosition>(() => ({
+    x: 0,
+    y: 0,
+  }));
 
   const bind = useDrag(({ down, movement }) => {
-    const result = down
+    const position: IJoystickPosition = down
       ? limit(movement[0], movement[1], radius)
       : { x: 0, y: 0 };
 
-    console.log(direction(Math.atan2(result.x, result.y)));
+    if (lockAxis === 'x') {
+      position.y = 0;
+    }
 
-    setCoordinates(result);
+    if (lockAxis === 'y') {
+      position.x = 0;
+    }
+
+    setPosition(position);
+
+    if (onChange) {
+      onChange(position);
+    }
   });
 
   return (

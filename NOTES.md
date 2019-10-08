@@ -17,6 +17,11 @@
 - y/z axis mismatch https://github.com/schteppe/cannon.js/issues/12
 - make similar effect https://airtightinteractive.com/demos/ctrlz/
 
+## Joystick/Knobs/Controls
+
+- https://twitter.com/0xca0a/status/1179499397744345089
+- https://twitter.com/dan_abramov/status/1058834904207761409
+
 # TOOLS
 
 - npx gltf-pipeline -i input.gltf -o output.gltf -d --draco.compressionLevel=10

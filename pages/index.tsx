@@ -5,6 +5,10 @@ import { Game } from '../scenes/Game';
 import { Cannon } from '../libs/cannon/Cannon';
 import { Stats2 } from '../components/Stats';
 import { Joystick } from '../components/ui/Joystick';
+import {
+  joystickEngineForceEventDispatcher,
+  joystickSteeringEventDispatcher,
+} from '../utils/joystick';
 
 const Index = () => {
   return (
@@ -22,8 +26,12 @@ const Index = () => {
         </Cannon>
       </Canvas>
 
-      <div className="joystick">
-        <Joystick />
+      <div className="joystick right">
+        <Joystick lockAxis="x" onChange={joystickSteeringEventDispatcher} />
+      </div>
+
+      <div className="joystick left">
+        <Joystick lockAxis="y" onChange={joystickEngineForceEventDispatcher} />
       </div>
 
       <style global jsx>
@@ -46,7 +54,13 @@ const Index = () => {
             background: transparent;
           }
 
-          .joystick {
+          .joystick.right {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+          }
+
+          .joystick.left {
             position: absolute;
             bottom: 20px;
             left: 20px;
