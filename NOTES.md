@@ -15,6 +15,7 @@
 - google IO demo https://www.clicktorelease.com/code/io15/
 - follow camera https://jsfiddle.net/Fyrestar/6519yedL/
 - y/z axis mismatch https://github.com/schteppe/cannon.js/issues/12
+- make similar effect https://airtightinteractive.com/demos/ctrlz/
 
 # TOOLS
 
