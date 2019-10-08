@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useRender } from 'react-three-fiber';
+import { useFrame } from 'react-three-fiber';
 import Stats from 'stats.js';
 
 export interface IStatsProps {
@@ -16,7 +16,7 @@ export const Stats2: FC<IStatsProps> = ({ panel }) => {
     return stats;
   }, [panel]);
 
-  useRender(() => {
+  useFrame(() => {
     stats.update();
   });
   return null;

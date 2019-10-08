@@ -1,4 +1,3 @@
-
 /**
  * Uniforms library for RectAreaLight shared webgl shaders
  * @author abelnation
@@ -16406,8 +16405,8 @@ export default {
       0.996389,
       -0.0808124,
       0.0489007,
-      1.6577
-    ]
+      1.6577,
+    ];
 
     var LTC_MAT_2 = [
       1,
@@ -32793,8 +32792,8 @@ export default {
       0.932164,
       0.0471899,
       0,
-      1
-    ]
+      1,
+    ];
 
     // data textures
 
@@ -32810,7 +32809,7 @@ export default {
       THREE.LinearFilter,
       THREE.NearestFilter,
       1
-    )
+    );
 
     var ltc_2 = new THREE.DataTexture(
       new Float32Array(LTC_MAT_2),
@@ -32824,19 +32823,19 @@ export default {
       THREE.LinearFilter,
       THREE.NearestFilter,
       1
-    )
+    );
 
-    ltc_1.needsUpdate = true
-    ltc_2.needsUpdate = true
+    ltc_1.needsUpdate = true;
+    ltc_2.needsUpdate = true;
 
-    THREE.UniformsLib.LTC_1 = ltc_1
-    THREE.UniformsLib.LTC_2 = ltc_2
+    THREE.UniformsLib.LTC_1 = ltc_1;
+    THREE.UniformsLib.LTC_2 = ltc_2;
 
     // add ltc data textures to material uniforms
 
-    var ltc = { ltc_1: { value: null }, ltc_2: { value: null } }
+    var ltc = { ltc_1: { value: null }, ltc_2: { value: null } };
 
-    Object.assign(THREE.ShaderLib.standard.uniforms, ltc)
-    Object.assign(THREE.ShaderLib.physical.uniforms, ltc)
-  }
-}
+    Object.assign(THREE.ShaderLib.standard.uniforms, ltc);
+    Object.assign(THREE.ShaderLib.physical.uniforms, ltc);
+  },
+};

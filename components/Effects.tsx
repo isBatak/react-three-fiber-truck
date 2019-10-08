@@ -1,4 +1,4 @@
-import { useThree, useRender } from 'react-three-fiber';
+import { useThree, useFrame } from 'react-three-fiber';
 import { useMemo, useEffect } from 'react';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
@@ -25,7 +25,7 @@ export const Effect = () => {
     bloom.setSize(size.width, size.height);
   }, [bloom, size]);
 
-  useRender(() => {
+  useFrame(() => {
     bloom.render();
   });
 

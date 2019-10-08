@@ -1,6 +1,6 @@
 import { World, Vec3, SAPBroadphase } from 'cannon';
 import React, { useState, useEffect, createContext, FC, useMemo } from 'react';
-import { useRender, useThree } from 'react-three-fiber';
+import { useFrame, useThree } from 'react-three-fiber';
 import { DebugRenderer } from './DebugRenderer';
 
 export const CannonContext = createContext<World>(null);
@@ -34,7 +34,7 @@ export const Cannon: FC<ICannonProps> = ({
     [debug]
   );
 
-  useRender(() => {
+  useFrame(() => {
     world.step(1 / 60), false, [world];
     if (debug) {
       debugRenderer.update();

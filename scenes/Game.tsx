@@ -12,6 +12,7 @@ import { useVehicleKeyboardControls } from '../hooks/useVehicleKeyboardControls'
 import { FollowCamera } from '../components/FollowCamera';
 import { Object3D, Vector3 } from 'three';
 import { Sky } from '../components/Sky';
+import { Cardboard } from '../components/Cardboard';
 
 interface IGameProps {}
 

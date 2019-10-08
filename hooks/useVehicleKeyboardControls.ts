@@ -14,6 +14,7 @@ export const useVehicleKeyboardControls = (
       if ((!up && type !== 'keydown') || !vehicle) {
         return;
       }
+      console.log('useVehicleKeyboardControls', key);
 
       vehicle.setBrake(0, 0);
       vehicle.setBrake(0, 1);
