@@ -821,10 +821,10 @@
   resolved "https://registry.yarnpkg.com/@seznam/compose-react-refs/-/compose-react-refs-1.0.2.tgz#6167c8b0a1f6d98bcdac79b8e7e2a1a450bfd072"
   integrity sha512-SpI8PXdcw2UjYnbgubn+GHIyb3jrQRkZlsNuzIFYnxTXBfNyAUmf7rlOYuqO9MlKiC80amL6aP+ZTi1ccTYVfA==
 
-"@types/node@^12.7.11":
-  version "12.7.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.11.tgz#be879b52031cfb5d295b047f5462d8ef1a716446"
-  integrity sha512-Otxmr2rrZLKRYIybtdG/sgeO+tHY20GxeDjcGmUnmmlCWyEnv2a2x1ZXBo3BTec4OiTXMQCiazB8NMBf0iRlFw==
+"@types/node@^12.7.12":
+  version "12.7.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.12.tgz#7c6c571cc2f3f3ac4a59a5f2bd48f5bdbc8653cc"
+  integrity sha512-KPYGmfD0/b1eXurQ59fXD1GBzhSQfz6/lKBxkaHX9dKTzjXbK68Zt7yGUxUsCS1jeTy/8aL+d9JEr+S54mpkWQ==
 
 "@types/prop-types@*":
   version "15.7.2"
@@ -3949,10 +3949,10 @@ next-transpile-modules@2.3.1:
   resolved "https://registry.yarnpkg.com/next-transpile-modules/-/next-transpile-modules-2.3.1.tgz#8977c070912fbc3e927c662431fc4e91ae335b43"
   integrity sha512-euNOBAk/CXZA6binwL47+QpcxAmK1pzH2zjF7XnRN55f2iuN/ecpUw5p3x4bikFu0yDPtSLS92nv9fcgcCo0vg==
 
-next@9.0.7:
-  version "9.0.7"
-  resolved "https://registry.yarnpkg.com/next/-/next-9.0.7.tgz#0baf77507dd303bb281c3a354c30767a93cf09c7"
-  integrity sha512-gqxdnGHJuuaKJAPi5cLytR/S88yAaoN0ra7Y3vVLLN+MTkNHQR97tSXlpU2ZE3o3tuHSUZqg7krbYtIS4WMOpw==
+next@9.1.1:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/next/-/next-9.1.1.tgz#bede2e834548020bc4d3be0c46e3ed7edaac6d14"
+  integrity sha512-++jiUA1GN/dOqe6+oLT78rdrRnPmf5yHUbug1tdZBYeQ6HE+ypDIeVelmCmyGx+JDNB3TcxNx5R2+D/Cbrwnng==
   dependencies:
     "@ampproject/toolbox-optimizer" "1.0.1"
     "@babel/core" "7.4.5"
@@ -5187,22 +5187,22 @@ react-three-fiber@^3.0.1:
     scheduler "0.13.3"
     tiny-emitter "^2.1.0"
 
-react-use-gesture@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-6.0.3.tgz#f13919f19a2a817b4e1831b25eb6535b3d177b94"
-  integrity sha512-pEKB/QOJWm+CCRTbrRnwKgDi0QBzDddKuNhBbmTc9NxW7hCx9jnYXbsg6om7rLaCFm3SBB+NZsez66AOZQZQvw==
+react-use-gesture@^6.0.6:
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-6.0.6.tgz#5e75241a2e56e148d268ce7d05cb97144c7dbd65"
+  integrity sha512-dkt8MTb45UuZ3SFDxynQWSnGIHCHvRl2aG4ajKSSzcG6hoAtxlhkjYlbYRmHtBpZ+cdkfds/1on+Vnr8eRZ+pg==
 
-react-use@^12.2.3:
-  version "12.2.3"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-12.2.3.tgz#cfadc5645f227a944cc438ac1c7c6ed775ba748f"
-  integrity sha512-dOLN0s2m4e2VjkSMzdZgrYfsVHeTq2bnPO84L9/7pWQ7ao7qjRwrV0UZRTprlwvTA3zFd6LZ41EHqGNNnbtIXw==
+react-use@^12.3.0:
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-12.3.0.tgz#4b7249059da2ab0bfc5f2ac773141150d4f16984"
+  integrity sha512-x2WyX6ZurupfJClc+bEGD8qD6EE7qtDrbw0azCTfxpeg+ErOkD7psccyeprk88IilWRzuf9B7/BM7oBRcbvMjQ==
   dependencies:
     copy-to-clipboard "^3.1.0"
     nano-css "^5.1.0"
     react-fast-compare "^2.0.4"
     react-wait "^0.3.0"
     resize-observer-polyfill "^1.5.1"
-    screenfull "^4.1.0"
+    screenfull "^5.0.0"
     set-harmonic-interval "^1.0.0"
     throttle-debounce "^2.0.1"
     ts-easing "^0.2.0"
@@ -5533,10 +5533,10 @@ schema-utils@^2.0.0, schema-utils@^2.0.1:
     ajv "^6.10.2"
     ajv-keywords "^3.4.1"
 
-screenfull@^4.1.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-4.2.1.tgz#3245b7bc73d2b7c9a15bd8caaf6965db7cbc7f04"
-  integrity sha512-PLSp6f5XdhvjCCCO8OjavRfzkSGL3Qmdm7P82bxyU8HDDDBhDV3UckRaYcRa/NDNTYt8YBpzjoLWHUAejmOjLg==
+screenfull@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-5.0.0.tgz#5c2010c0e84fd4157bf852877698f90b8cbe96f6"
+  integrity sha512-yShzhaIoE9OtOhWVyBBffA6V98CDCoyHTsp8228blmqYy1Z5bddzE/4FPiJKlr8DVR4VBiiUyfPzIQPIYDkeMA==
 
 "semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0:
   version "5.7.1"
