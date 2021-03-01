@@ -21,7 +21,7 @@
     "react-use": "^12.3.0",
     "react-use-gesture": "^6.0.6",
     "stats.js": "^0.17.0",
-    "three": "0.109.0"
+    "three": "0.125.0"
   },
   "devDependencies": {
     "@types/node": "^12.7.12",
